@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>CreateRide bistaren orria</title>
+		<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px 40px;
+            text-align: center;
+            width: 400px;
+        }
+        table {
+            width: 100%;
+            border-spacing: 10px;
+        }
+        h1, h3 {
+            margin-bottom: 20px;
+        }
+        h3 {
+            color: #333;
+        }
+        input, select, .ui-button, .ui-inputfield {
+            width: 100%;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .button-close {
+            background-color: #ccc;
+            color: black;
+        }
+        .button-close:hover {
+            background-color: #999;
+        }
+    </style>
+	</h:head>
+	<h:body>
+	<div class="form-container">
+		<h:form>
+			<h1>Create Ride</h1>
+			<table>
+				<tr><td>Departing city</td> <td><h:inputText id="depart" value="#{createRideBean.depart}" ></h:inputText></td></tr>
+				<tr><td>Arrival city</td> <td><h:inputText id="arrival" value="#{createRideBean.arrival}" ></h:inputText></td></tr>
+				<tr><td>Car</td><td><h:selectOneMenu id="kotxea" value ="#{createRideBean.kotxea}"><f:selectItem itemLabel="Choose a car" itemValue="" /><f:selectItems value="#{createRideBean.kotxeak}" var="kotxea" itemValue="#{kotxea.matrikula}" itemLabel="#{kotxea.matrikula}" /><f:ajax event="change" render="seats" listener="#{createRideBean.updateSeats}" /></h:selectOneMenu></td></tr>
+				<tr><td>Seats</td> <td><h:outputText id="seats" value="#{createRideBean.seats}" ></h:outputText></td></tr>
+				<tr><td>Price</td> <td><h:inputText id="price" value="#{createRideBean.price}" ></h:inputText></td></tr>	
+				<tr><td>Data (PrimeFaces-ekin):</td><td><p:calendar id="data" value="#{createRideBean.data}" navigator="false" mode="inline"></p:calendar></td></tr>
+				<tr><td><h:commandButton value="Create ride" action="#{createRideBean.bidaiaSortu}" styleClass="button" /></td><td><h:commandButton value="Close" action="HomePage?faces-redirect=true" styleClass="button button-close" /></td></tr>
+			</table>
+			<h:messages globalOnly="true" layout="table"/>
+		</h:form>
+	</div>
+	</h:body>
+</f:view>
+</html>

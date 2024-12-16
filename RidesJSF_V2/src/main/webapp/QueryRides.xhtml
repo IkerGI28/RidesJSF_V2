@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>QueryRides bistaren orria</title>
+		<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px 40px;
+            text-align: center;
+            width: 400px;
+        }
+        table {
+            width: 100%;
+            border-spacing: 10px;
+        }
+        h1, h3 {
+            margin-bottom: 20px;
+        }
+        h3 {
+            color: #333;
+        }
+        input, select, .ui-button, .ui-inputfield {
+            width: 100%;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .button-close {
+            background-color: #ccc;
+            color: black;
+        }
+        .button-close:hover {
+            background-color: #999;
+        }
+    </style>
+	</h:head>
+	<h:body>
+	<div class="form-container">
+		<h:form>
+			<h1>Query Rides</h1>
+			<table>
+				<tr>
+					<td>Departing city</td>
+					<td><h:selectOneMenu id="depart" value="#{queryRidesBean.depart}">
+							<f:selectItem itemLabel="Choose a city" itemValue="" />
+							<f:selectItems value="#{queryRidesBean.departs}" var="city"
+								itemValue="#{city}" itemLabel="#{city}" />
+							<f:ajax event="change" render="arrival"
+								listener="#{queryRidesBean.updateArrivals}" />
+						</h:selectOneMenu></td>
+				</tr>
+				<tr>
+					<td>Arrival city</td>
+					<td><h:selectOneMenu id="arrival"
+							value="#{queryRidesBean.arrival}">
+							<f:selectItem itemLabel="Choose a city" itemValue="" />
+							<f:selectItems value="#{queryRidesBean.arrivals}" var="city"
+								itemValue="#{city}" itemLabel="#{city}" />
+							<f:ajax event="change" listener="#{queryRidesBean.updateAvailableDates}" />
+						</h:selectOneMenu></td>
+				</tr>
+				<tr>
+					<td>Date:</td>
+					<td><p:calendar id="data" value="#{queryRidesBean.data}"
+							navigator="false" mode="inline"
+							selectionMode="single" ajax="true">
+							<p:ajax event="dateSelect" update="ridesTable, data" />
+						</p:calendar></td>
+				</tr>
+				<tr>
+					<td colspan="2"><p:dataTable id="ridesTable"
+							value="#{queryRidesBean.ridesOnDate}" var="ride" paginator="true"
+							rows="10">
+							<p:column headerText="Driver">
+								<h:outputText value="#{ride.driver.name}" />
+							</p:column>
+							<p:column headerText="Seats">
+								<h:outputText value="#{ride.nPlaces}" />
+							</p:column>
+							<p:column headerText="Price">
+								<h:outputText value="#{ride.price}" />
+							</p:column>
+						</p:dataTable></td>
+				</tr>
+
+				<tr>
+					<td><h:commandButton value="Find Rides" action="#{queryRidesBean.loadRidesOnDate}" update="ridesTable" styleClass="button" /></td><td><h:commandButton value="Close"
+							action="#{queryRidesBean.redirectToCorrespondingMenu}" styleClass="button button-close" /></td>
+				</tr>
+				<h:messages id="mezuak" style="color:blue" />
+			</table>
+		</h:form>
+	</div>
+	</h:body>
+</f:view>
+</html>

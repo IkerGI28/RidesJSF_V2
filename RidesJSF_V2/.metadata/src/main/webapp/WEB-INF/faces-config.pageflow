@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf17339280259100" configfile="/RidesJSF_V2/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="HomePage.xhtml" x="338" y="370" id="pf17339280582521" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf17339280582522 pf17339280582523" inlinks="pf17339280582524 pf17339280582525" path="HomePage.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="CreateRide.xhtml" x="122" y="178" id="pf17339280582526" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf17339280582525" inlinks="pf17339280582522" path="/CreateRide.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="QueryRides.xhtml" x="122" y="562" id="pf17339280582537" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf17339280582524" inlinks="pf17339280582523" path="/QueryRides.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="PriceButton.xhtml" x="122" y="946" id="pf17340207416760" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf17340207416771" path="/PriceButton.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="PriceRidesTable" x="338" y="946" id="pf17340207416772" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf17340207416771" path="PriceRidesTable"/>
+  <links id="pf17339280582522" target="pf17339280582526" source="pf17339280582521" outcome="CreateRide" redirect="true"/>
+  <links id="pf17339280582523" target="pf17339280582537" source="pf17339280582521" outcome="QueryRides" redirect="true"/>
+  <links id="pf17339280582524" target="pf17339280582521" source="pf17339280582537" outcome="Close" redirect="true"/>
+  <links id="pf17339280582525" target="pf17339280582521" source="pf17339280582526" outcome="Close" redirect="true"/>
+  <links id="pf17340207416771" target="pf17340207416772" source="pf17340207416760" outcome="PriceRidesTable" redirect="true"/>
+</pageflow:Pageflow>
